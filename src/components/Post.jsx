@@ -9,6 +9,7 @@ const Post = ({ feed }) => {
   const { isPremiumUser } = useUserContext();
   const feedLength = feed.length;
   const { image, name, username, postBody } = feed[randomIndex];
+  console.log(count);
   if (count === 20 && !isPremiumUser) {
     return <PayWall />;
   }

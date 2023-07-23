@@ -31,7 +31,7 @@ export const UserProvider = ({ children }) => {
       const { name, password } = loginUser;
 
       const authUser = users.find(
-        (user) => user.name === name || user.email === name
+        (user) => user.username === name || user.email === name
       );
       if (!authUser) {
         toast.error("User doesn't exist");
@@ -147,7 +147,7 @@ export const UserProvider = ({ children }) => {
       return { ...prevState, isPremiumUser: true };
     });
   };
-  const logout = () => {
+  const logout = (reset) => {
     setUser({
       other_users: [],
       user_profile: null,
@@ -155,6 +155,9 @@ export const UserProvider = ({ children }) => {
       following: [],
       isPremiumUser: false,
     });
+    reset();
+    console.log(reset);
+    console.log("logging out");
     removeFromLocalStorage();
   };
   return (

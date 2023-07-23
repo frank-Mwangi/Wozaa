@@ -45,7 +45,7 @@ const RegisterPage = () => {
         </div>
         <div className="form-row">
           <label className="label desc" htmlFor="name">
-            name
+            email / username
           </label>
           <input
             className="form-input"

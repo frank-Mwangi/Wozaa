@@ -61,6 +61,9 @@ export const FeedProvider = ({ children }) => {
       console.log(error.response);
     }
   };
+  const resetCount = () => {
+    setCount(0);
+  };
   //Display posts at random
   const randomisePost = (length) => {
     const randomIndex = Math.floor(Math.random() * length);
@@ -85,6 +88,7 @@ export const FeedProvider = ({ children }) => {
         randomisePost,
         count,
         handleFeedCount,
+        resetCount,
       }}
     >
       {children}

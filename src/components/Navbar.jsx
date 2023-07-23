@@ -9,7 +9,8 @@ import { RxCross1 } from "react-icons/rx";
 
 const Navbar = () => {
   const { user_profile, logout } = useUserContext();
-  const { openSidebar, closeSidebar, isSidebarOpen } = useFeedContext();
+  const { openSidebar, closeSidebar, isSidebarOpen, resetCount } =
+    useFeedContext();
 
   return (
     <Wrapper>
@@ -33,7 +34,12 @@ const Navbar = () => {
         {user_profile && <NavLinks />}
         <div className="btn-container">
           {user_profile ? (
-            <button onClick={logout} className="btn btn-secondary">
+            <button
+              onClick={() => {
+                logout(resetCount);
+              }}
+              className="btn btn-secondary"
+            >
               logout
             </button>
           ) : (
