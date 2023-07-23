@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { useFeedContext } from "../contexts/FeedContext";
+import { useUserContext } from "../contexts/UserContext";
 const NavLinks = () => {
   const { closeSidebar } = useFeedContext();
+  const { isPremiumUser } = useUserContext();
   return (
     <ul className="nav-links">
       <li>
@@ -29,11 +31,14 @@ const NavLinks = () => {
           users
         </Link>
       </li>
-      <li>
-        <Link onClick={closeSidebar} className="link" to="payment">
-          upgrade
-        </Link>
-      </li>
+
+      {!isPremiumUser && (
+        <li>
+          <Link onClick={closeSidebar} className="link" to="payment">
+            upgrade
+          </Link>
+        </li>
+      )}
     </ul>
   );
 };

@@ -41,6 +41,7 @@ const Wrapper = styled.aside`
     height: 100%;
     background: var(--gray-50);
     padding: 1rem 0;
+    z-index: 10;
     transform: translateX(-100%);
     transition: var(--transition);
   }

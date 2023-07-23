@@ -6,7 +6,7 @@ import {
   setLocalStorage,
   getFromLocalStorage,
   removeFromLocalStorage,
-} from "../utils/localStarage";
+} from "../utils/localStorage";
 
 const UserContext = createContext();
 
@@ -99,7 +99,6 @@ export const UserProvider = ({ children }) => {
         });
         setLocalStorage("other_users", otherUsers);
         setLocalStorage("user_posts", userPosts);
-        setLocalStorage("following", user.following);
       } else {
         toast.error("Invalid password");
       }
@@ -129,7 +128,14 @@ export const UserProvider = ({ children }) => {
     });
     // console.log(userPosts);
     setUser((prevState) => {
+      setLocalStorage("following", [...user.following, userPosts]);
       return { ...prevState, following: [...user.following, userPosts] };
+    });
+  };
+  const validatePayment = () => {
+    console.log(user.isPremiumUser);
+    setUser((prevState) => {
+      return { ...prevState, isPremiumUser: true };
     });
   };
   const logout = () => {
@@ -143,7 +149,9 @@ export const UserProvider = ({ children }) => {
     removeFromLocalStorage();
   };
   return (
-    <UserContext.Provider value={{ ...user, login, followUser, logout }}>
+    <UserContext.Provider
+      value={{ ...user, login, followUser, validatePayment, logout }}
+    >
       {children}
     </UserContext.Provider>
   );

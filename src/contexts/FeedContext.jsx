@@ -70,7 +70,7 @@ export const FeedProvider = ({ children }) => {
   };
   const handleFeedCount = () => {
     setCount((prevState) => {
-      return prevState + 1;
+      return prevState > 20 ? 20 : prevState + 1;
     });
   };
   useEffect(() => {

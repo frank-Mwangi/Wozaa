@@ -38,7 +38,9 @@ const Post = ({ feed }) => {
             >
               next post
             </button>
-            <span className="count desc">{`${20 - count} post(s) left`}</span>
+            {!isPremiumUser && (
+              <span className="count desc">{`${20 - count} post(s) left`}</span>
+            )}
           </div>
         </div>
       </div>
