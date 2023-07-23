@@ -5,7 +5,7 @@ import { useUserContext } from "../contexts/UserContext";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-  const { isSidebarOpen, resetCount } = useFeedContext();
+  const { isSidebarOpen, closeSidebar, resetCount } = useFeedContext();
   const { logout, user_profile } = useUserContext();
   return (
     <Wrapper>
@@ -20,6 +20,7 @@ const Sidebar = () => {
             {user_profile ? (
               <button
                 onClick={() => {
+                  closeSidebar();
                   logout(resetCount);
                 }}
                 className="btn btn-secondary"
