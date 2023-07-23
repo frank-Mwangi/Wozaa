@@ -132,6 +132,15 @@ export const UserProvider = ({ children }) => {
       return { ...prevState, following: [...user.following, userPosts] };
     });
   };
+  const unFollowUser = (username) => {
+    const newFollowers = user.following.filter((item) => {
+      const { username: user_handle } = item[0];
+      return username !== user_handle;
+    });
+    setUser((prevState) => {
+      return { ...prevState, following: newFollowers };
+    });
+  };
   const validatePayment = () => {
     console.log(user.isPremiumUser);
     setUser((prevState) => {
@@ -150,7 +159,14 @@ export const UserProvider = ({ children }) => {
   };
   return (
     <UserContext.Provider
-      value={{ ...user, login, followUser, validatePayment, logout }}
+      value={{
+        ...user,
+        login,
+        followUser,
+        unFollowUser,
+        validatePayment,
+        logout,
+      }}
     >
       {children}
     </UserContext.Provider>

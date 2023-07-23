@@ -1,7 +1,15 @@
 import { styled } from "styled-components";
 import { useUserContext } from "../contexts/UserContext";
 const User = ({ userId, image, name, username, website }) => {
-  const { followUser } = useUserContext();
+  const { followUser, following, unFollowUser } = useUserContext();
+  let tempArray = following.flat().map(({ username }) => {
+    return username;
+  });
+
+  tempArray = new Set(tempArray);
+  tempArray = [...tempArray];
+
+  const isFollowing = tempArray.includes(username);
   return (
     <Wrapper>
       <div className="content">
@@ -12,9 +20,18 @@ const User = ({ userId, image, name, username, website }) => {
             @{username} / {website}
           </p>
           <div className="btn-container">
-            <button className="follow-btn" onClick={() => followUser(userId)}>
-              follow
-            </button>
+            {isFollowing ? (
+              <button
+                className="follow-btn"
+                onClick={() => unFollowUser(username)}
+              >
+                unfollow
+              </button>
+            ) : (
+              <button className="follow-btn" onClick={() => followUser(userId)}>
+                follow
+              </button>
+            )}
           </div>
         </div>
       </div>
