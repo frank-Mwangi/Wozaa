@@ -1,8 +1,12 @@
 import { styled } from "styled-components";
 import { NavLinks } from "../components";
 import { useFeedContext } from "../contexts/FeedContext";
+import { useUserContext } from "../contexts/UserContext";
+import { Link } from "react-router-dom";
+
 const Sidebar = () => {
   const { isSidebarOpen } = useFeedContext();
+  const { logout, closeSidebar, user_profile } = useUserContext();
   return (
     <Wrapper>
       <div
@@ -11,7 +15,18 @@ const Sidebar = () => {
         }
       >
         <div className="sidebar-body">
-          <NavLinks />
+          {user_profile && <NavLinks />}
+          <div className="btn-container">
+            {user_profile ? (
+              <button onClick={logout} className="btn btn-secondary">
+                logout
+              </button>
+            ) : (
+              <Link to="/login" className="btn btn-secondary">
+                login
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </Wrapper>
@@ -60,6 +75,9 @@ const Wrapper = styled.aside`
 
       padding-left: 1.5rem;
     }
+  }
+  .btn-container {
+    text-align: center;
   }
   @media (min-width: 992px) {
     .sidebar-container {

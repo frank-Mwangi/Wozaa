@@ -14,7 +14,7 @@ const initialState = {
 
 export const FeedProvider = ({ children }) => {
   const [feed, setFeed] = useState(initialState);
-
+  const [count, setCount] = useState(0);
   const openSidebar = () => {
     setFeed((prevState) => {
       return { ...prevState, isSidebarOpen: true };
@@ -68,12 +68,24 @@ export const FeedProvider = ({ children }) => {
       return { ...prevState, randomIndex };
     });
   };
+  const handleFeedCount = () => {
+    setCount((prevState) => {
+      return prevState + 1;
+    });
+  };
   useEffect(() => {
     fetchData();
   }, []);
   return (
     <FeedContext.Provider
-      value={{ ...feed, openSidebar, closeSidebar, randomisePost }}
+      value={{
+        ...feed,
+        openSidebar,
+        closeSidebar,
+        randomisePost,
+        count,
+        handleFeedCount,
+      }}
     >
       {children}
     </FeedContext.Provider>

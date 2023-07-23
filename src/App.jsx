@@ -3,7 +3,14 @@ import { Feed, Error, SharedLayout, Login } from "./pages";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { MyProfile, MyPosts, Following, Users, PrivateRoutes } from "./pages";
+import {
+  MyProfile,
+  MyPosts,
+  Following,
+  Users,
+  PrivateRoutes,
+  Payment,
+} from "./pages";
 
 function App() {
   return (
@@ -40,6 +47,14 @@ function App() {
             element={
               <PrivateRoutes>
                 <Users />
+              </PrivateRoutes>
+            }
+          />
+          <Route
+            path="/payment"
+            element={
+              <PrivateRoutes>
+                <Payment />
               </PrivateRoutes>
             }
           />

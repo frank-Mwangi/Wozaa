@@ -33,9 +33,9 @@ const Navbar = () => {
         {user_profile && <NavLinks />}
         <div className="btn-container">
           {user_profile ? (
-            <Link to="/" onClick={logout} className="btn btn-secondary">
+            <button onClick={logout} className="btn btn-secondary">
               logout
-            </Link>
+            </button>
           ) : (
             <Link to="/login" className="btn btn-secondary">
               login

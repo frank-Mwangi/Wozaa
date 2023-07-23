@@ -7,3 +7,4 @@ export { default as MyPosts } from "./MyPosts";
 export { default as Following } from "./Following";
 export { default as Users } from "./UsersPage";
 export { default as PrivateRoutes } from "./PrivateRoutes";
+export { default as Payment } from "./PaymentPage";

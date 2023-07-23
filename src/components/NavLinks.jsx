@@ -29,6 +29,11 @@ const NavLinks = () => {
           users
         </Link>
       </li>
+      <li>
+        <Link onClick={closeSidebar} className="link" to="payment">
+          upgrade
+        </Link>
+      </li>
     </ul>
   );
 };

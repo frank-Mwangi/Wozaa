@@ -1,10 +1,18 @@
 import { styled } from "styled-components";
 import { useFeedContext } from "../contexts/FeedContext";
+import { useUserContext } from "../contexts/UserContext";
+import PayWall from "./PayWall";
 
 const Post = ({ feed }) => {
-  const { randomIndex, randomisePost } = useFeedContext();
+  const { randomIndex, randomisePost, count, handleFeedCount } =
+    useFeedContext();
+  const { isPremiumUser } = useUserContext();
   const feedLength = feed.length;
   const { image, name, username, postBody } = feed[randomIndex];
+  if (count === 20 && !isPremiumUser) {
+    return <PayWall />;
+  }
+
   return (
     <Wrapper>
       <div className="center-container">
@@ -22,11 +30,15 @@ const Post = ({ feed }) => {
           </div>
           <div className="btn-container">
             <button
-              onClick={() => randomisePost(feedLength)}
+              onClick={() => {
+                randomisePost(feedLength);
+                handleFeedCount();
+              }}
               className="toggle-posts-btn"
             >
               next post
             </button>
+            <span className="count desc">{`${20 - count} post(s) left`}</span>
           </div>
         </div>
       </div>
@@ -36,6 +48,7 @@ const Post = ({ feed }) => {
 const Wrapper = styled.article`
   margin-top: 4rem;
   .post {
+    position: relative;
     margin: 0 auto;
     padding: 1rem 2rem;
     background: var(--gray-50);
@@ -78,6 +91,12 @@ const Wrapper = styled.article`
       color: var(--primary-600);
       border-bottom: 1px solid var(--primary-600);
     }
+  }
+  .count {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 `;
 export default Post;
